@@ -28,11 +28,11 @@ async function processo(){
     console.log("Preço: " + fechamento[499] + " RSI: "+rsi); 
     
     if (rsi > 70 && iscomprado){
-        console.log("Vendi a " + fechamento[499] + "com RSI a "+ rsi);
+        console.log("*-*Vendi a " + fechamento[499] + "com RSI a "+ rsi);
         iscomprado = false;
     }
     else if (rsi < 30 && !iscomprado){
-            console.log("Comprei a " + fechamento[499] + "com RSI a "+ rsi);
+            console.log("*-*Comprei a " + fechamento[499] + "com RSI a "+ rsi);
             iscomprado = true;
     }
     
