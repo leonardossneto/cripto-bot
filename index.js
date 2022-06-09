@@ -38,13 +38,13 @@ async function processo(){
     if (rsi > 70 && iscomprado){
         console.log("*-*Vendi a " + fechamento[499] + "com RSI a "+ rsi);
         const resultVenda = await api.sell(credenciais, symbol, quantidade);
-        //console.log(resultVenda);
+        console.log(resultVenda);
         iscomprado = false;
     }
     else if (rsi < 30 && !iscomprado){
             console.log("*-*Comprei a " + fechamento[499] + "com RSI a "+ rsi);
             const resultCompra = await api.buy(credenciais, symbol, quantidade);
-            //console.log(resultCompra);
+            console.log(resultCompra);
             iscomprado = true;
     }
     
