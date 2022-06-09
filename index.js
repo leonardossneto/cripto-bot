@@ -1,5 +1,11 @@
 //BTCBUSD
-
+const axios = require("axios");
+const api = require("imersao-bot-cripto-api");
+const credenciais = {
+    apiKey: "rF97FjodPK6M3kueAWxY6x9Ce93WgBGxo6T0baPkuJGQtKKQchqqbrwxW9jAPLlM",
+    apiSecret: "HUHwd5oG934InZOzQcwVqxL8kFH0g8z3P8Biad4ji5CBeIIG3GT25lnHYtrJ0h1g",
+    test:true
+}
 function calcRSI(fechamento){
     let ganhos = 0;
     let perdas = 0;
@@ -19,8 +25,10 @@ function calcRSI(fechamento){
 let iscomprado = false;
 
 async function processo(){
-    const axios = require("axios");
-    const resposta = await axios.get("https://api.binance.com/api/v3/klines?symbol=BTCBUSD&interval=1m");
+    const symbol = "BTCBUSD";
+    const quantidade = 0.001;
+
+    const resposta = await axios.get(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1m`);
     const fechamento = resposta.data.map(vela => parseFloat(vela[4]));
     const rsi = calcRSI(fechamento);
     
@@ -29,10 +37,14 @@ async function processo(){
     
     if (rsi > 70 && iscomprado){
         console.log("*-*Vendi a " + fechamento[499] + "com RSI a "+ rsi);
+        const resultVenda = await api.sell(credenciais, symbol, quantidade);
+        //console.log(resultVenda);
         iscomprado = false;
     }
     else if (rsi < 30 && !iscomprado){
             console.log("*-*Comprei a " + fechamento[499] + "com RSI a "+ rsi);
+            const resultCompra = await api.buy(credenciais, symbol, quantidade);
+            //console.log(resultCompra);
             iscomprado = true;
     }
     

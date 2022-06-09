@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/leonardossneto/cripto-bot#readme",
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "imersao-bot-cripto-api": "github:luiztools/imersao-bot-cripto-api"
   }
 }
